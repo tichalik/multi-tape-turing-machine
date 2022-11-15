@@ -8,7 +8,7 @@ package pl.polsl.tomasz.michalik.view;
 import java.util.ArrayList;
 import pl.polsl.tomasz.michalik.model.Tape;
 /** console interface
- * @version 1.0
+ * @version 2.0
  * @author Tomasz Michalik
  */
 public class TuringMachineView {

@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import pl.polsl.tomasz.michalik.exceptions.*;
-import pl.polsl.tomasz.michalik.model.Move;
 
 /**
  * class representing the turing machine
  * @author Tomasz Michalik
- * @version 1.0
+ * @version 2.0
  */
 
 public class TuringMachine {
@@ -61,6 +60,14 @@ public class TuringMachine {
      */
     Set<String> states;
 
+    /**
+     * dummy constructor 
+     * 
+     */
+    public TuringMachine(){
+        noTapes = 0;
+    }
+    
     /**
      * oonstructor
      * @param noTapes number of tapes the machine has

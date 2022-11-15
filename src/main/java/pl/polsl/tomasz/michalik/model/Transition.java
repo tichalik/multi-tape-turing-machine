@@ -5,14 +5,13 @@
 package pl.polsl.tomasz.michalik.model;
 
 import java.util.ArrayList;
-import pl.polsl.tomasz.michalik.model.Move;
 
 
 
 
 /**
  * class representing unit transtion of the turing machine
- * @version 1.0
+ * @version 2.0
  * @author Tomasz Michalik
  */
 public class Transition {
