@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: pl.polsl.tomasz.michalik.model.TuringMachineTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.074 sec <<< FAILURE!
+pl.polsl.tomasz.michalik.model.TuringMachineTest.testAddEmptyTransition()  Time elapsed: 0.073 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.size()" because the return value of "pl.polsl.tomasz.michalik.model.Transition.getResultSymbols()" is null
+	at pl.polsl.tomasz.michalik.model.TuringMachine.addTransition(TuringMachine.java:137)
+	at pl.polsl.tomasz.michalik.model.TuringMachineTest.testAddEmptyTransition(TuringMachineTest.java:139)
+
