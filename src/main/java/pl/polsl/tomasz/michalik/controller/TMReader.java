@@ -17,11 +17,18 @@ import pl.polsl.tomasz.michalik.model.Transition;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
 
 /**
- * Reads a turing machine configuration from a given fine
+ * Reads a turing machine configuration from a given input
  * @author Tomasz Michalik
  * @version 1.0
  */
 public class TMReader {
+    /**
+     * reads a TM from the given file
+     * @param filename path to the file 
+     * @return read TM
+     * @throws FileNotFoundException in case there is no such a file as filename
+     * @throws TMException in case the input is wrong
+     */
     public TuringMachine readTMFromFile(String filename) throws FileNotFoundException, TMException
     { 
         //parameters for the ruring machine
@@ -98,6 +105,13 @@ public class TMReader {
         
         return tM;
     }
+    
+    
+    /**
+     * reads TM configuration from user input on the command line
+     * @return obtained TM
+     * @throws TMException  in case the input is wrong
+     */
     public TuringMachine readFromCmd() throws TMException
     {
         Scanner scanner = new Scanner(System.in);

@@ -82,7 +82,7 @@ public class Tape {
                 position +=1;
         }
         
-        if (position>contents.size()){
+        if (position>=contents.size()){
             //moved past the tape -- correcting
             contents.add(blank);
         }
