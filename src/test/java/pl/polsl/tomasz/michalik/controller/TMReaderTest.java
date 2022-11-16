@@ -9,7 +9,6 @@ package pl.polsl.tomasz.michalik.controller;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pl.polsl.tomasz.michalik.controller.TMReader;
 import pl.polsl.tomasz.michalik.exceptions.TMException;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
 
@@ -27,16 +26,16 @@ public class TMReaderTest {
 
     /**
      * Test of readTMFromFile method, of class TMReader.Various files included, with these it should not fail
-     * @param filename name of the file
+     * @param fileId number of the file; read files are "input_files/good"+fileId+".txt"
      */
     @ParameterizedTest
-    @ValueSource (strings = {"input.txt", "good1.txt", "good2.txt", "good3.txt"})
-    public void testGoodReadTMFromFile(String filename)  {
+    @ValueSource (ints = {1,2,3})
+    public void testGoodReadTMFromFile(int fileId)  {
         //GIVEN
         TMReader tmr = new TMReader();
                 
         try{
-            TuringMachine  tm = tmr.readTMFromFile(filename);
+            TuringMachine  tm = tmr.readTMFromFile("input_files//good"+fileId+".txt");
         }catch(TMException ex){
             fail("it should throw no exceptions");
         }catch (Exception ex){
@@ -46,16 +45,16 @@ public class TMReaderTest {
 
     /**
      * Test of readTMFromFile method, of class TMReader.Various files included, with these it should not fail
-     * @param filename name of the file
+     * @param fileId number of the file; read files are "input_files/bad"+fileId+".txt"
      */
     @ParameterizedTest
-    @ValueSource (strings = {"bad1.txt", "bad2.txt", "bad3.txt"})
-    public void testBadReadTMFromFile(String filename) {
+    @ValueSource (ints = {1,2,3,4,5,6,7,8})
+    public void testBadReadTMFromFile(int fileId) {
         //GIVEN
         TMReader tmr = new TMReader();
                 
         try{
-            TuringMachine  tm = tmr.readTMFromFile(filename);
+            TuringMachine  tm = tmr.readTMFromFile("input_files//bad"+fileId+".txt");
         }catch(TMException ex){
             
         }catch (Exception ex){

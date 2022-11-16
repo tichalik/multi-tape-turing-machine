@@ -47,7 +47,7 @@ public class TuringMachineTest {
     public void testMoveLeft(int noSteps) {
         //GIVEN 
         try{
-            instance = tmr.readTMFromFile("moveLeft.txt");
+            instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -73,7 +73,7 @@ public class TuringMachineTest {
     public void testMoveRight(int noSteps) {
         //GIVEN 
         try{
-            instance = tmr.readTMFromFile("moveRight.txt");
+            instance = tmr.readTMFromFile("input_files\\moveRight.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -99,7 +99,7 @@ public class TuringMachineTest {
     public void testNotMove(int noSteps) {
         //GIVEN 
         try{
-            instance = tmr.readTMFromFile("noMove.txt");
+            instance = tmr.readTMFromFile("input_files\\noMove.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -125,7 +125,7 @@ public class TuringMachineTest {
     public void testAddEmptyTransition() {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -156,7 +156,7 @@ public class TuringMachineTest {
     public void testAddBadISymbolsTranstion(int noTapes) {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -199,7 +199,7 @@ public class TuringMachineTest {
     public void testAddBadOSymbolsTranstion(int noTapes) {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -241,7 +241,7 @@ public class TuringMachineTest {
     public void testAddBadOMovesTranstion(int noTapes) {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -285,7 +285,7 @@ public class TuringMachineTest {
     public void testAddNTapesTransition(int noTapes) {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -324,7 +324,7 @@ public class TuringMachineTest {
     public void testAddBadSymbolTransition(String initialState) {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("input.txt");
+            instance = tmr.readTMFromFile("input_files\\input.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -361,7 +361,7 @@ public class TuringMachineTest {
     public void checkLeftBlank() {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("moveLeft.txt");
+            instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
@@ -397,7 +397,7 @@ public class TuringMachineTest {
     public void checkRightBlank() {
         //GIVEN
         try{
-            instance = tmr.readTMFromFile("moveRight.txt");
+            instance = tmr.readTMFromFile("input_files\\moveRight.txt");
         }
         catch (FileNotFoundException ex){
             fail("something went wrong with the test itsllf, check for filename");
