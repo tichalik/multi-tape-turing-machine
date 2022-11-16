@@ -78,8 +78,10 @@ public class Tape {
 
             case L:
                 position -= 1;
+                break;
             case R:
                 position +=1;
+                break;
         }
         
         if (position>=contents.size()){
