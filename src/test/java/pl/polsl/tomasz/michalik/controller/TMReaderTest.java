@@ -9,6 +9,7 @@ package pl.polsl.tomasz.michalik.controller;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import pl.polsl.tomasz.michalik.exceptions.FileFormatException;
 import pl.polsl.tomasz.michalik.exceptions.TMException;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
 
@@ -35,9 +36,7 @@ public class TMReaderTest {
         TMReader tmr = new TMReader();
                 
         try{
-            TuringMachine  tm = tmr.readTMFromFile("input_files//good"+fileId+".txt");
-        }catch(TMException ex){
-            fail("it should throw no exceptions");
+            TuringMachine  tm = tmr.readTMFromFile("input_files\\good"+fileId+".txt");
         }catch (Exception ex){
             fail("iit should throw no exceptions");
         }
@@ -54,13 +53,15 @@ public class TMReaderTest {
         TMReader tmr = new TMReader();
                 
         try{
-            TuringMachine  tm = tmr.readTMFromFile("input_files//bad"+fileId+".txt");
+            TuringMachine  tm = tmr.readTMFromFile("input_files\\bad"+fileId+".txt");
         }catch(TMException ex){
             
-        }catch (Exception ex){
-            fail("it should have not thrown TMException");
+        }catch (FileFormatException ex){
+            
         }
-        fail("it should throw exceptions");
+        catch (Exception ex){
+            fail("it should have thrown TMException, got " + ex.getMessage());
+        }
     }
    
 }

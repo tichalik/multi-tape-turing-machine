@@ -1,6 +1,6 @@
 package pl.polsl.tomasz.michalik.controller;
 
-import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 import pl.polsl.tomasz.michalik.exceptions.*;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
@@ -34,8 +34,9 @@ public class Controller {
                 try{
                     turingMachine = tmr.readTMFromFile(args[0]);
                 }
-                catch (FileNotFoundException ex){
-                    System.out.print("error, file" + args[0] + " not found");
+                catch (FileFormatException ex){
+                    System.out.print(ex.getMessage());
+                    return;
                 }
             }
             // gettting parameters from the command line
