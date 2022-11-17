@@ -15,7 +15,8 @@ import pl.polsl.tomasz.michalik.model.TuringMachine;
 
 /**
  *
- * @author huawei
+ * @author Tomasz Michalik
+ * @version 1.2
  */
 public class TMReaderTest {
     

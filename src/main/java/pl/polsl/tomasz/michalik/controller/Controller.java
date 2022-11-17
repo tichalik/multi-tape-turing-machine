@@ -17,7 +17,7 @@ import pl.polsl.tomasz.michalik.view.TuringMachineView;
 /** the controller class, has the app;s main method
  *
  * @author Tomasz Michalik
- * @version 2.0
+ * @version 2.2
  */
 public class Controller {
     /** main method controlling entire app
@@ -50,18 +50,16 @@ public class Controller {
         
         //managing the view
         TuringMachineView view = new TuringMachineView();
-        view.showCurrentState(turingMachine.getCurrentState());
-        view.showTapes(turingMachine.getTapes());
         
         Scanner scanner = new Scanner(System.in);
         
         Boolean goOn = true;
         while (goOn){
-            turingMachine.next();
             view.showCurrentState(turingMachine.getCurrentState());
             view.showTapes(turingMachine.getTapes());
             System.out.println("continue? [y/n]");
             goOn = "y".equals(scanner.nextLine());
+            turingMachine.next();
         }
         
     }

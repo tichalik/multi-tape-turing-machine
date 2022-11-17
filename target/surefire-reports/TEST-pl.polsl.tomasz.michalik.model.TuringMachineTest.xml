@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.524" tests="55" errors="0" skipped="1" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="19.0.1+10-21"/>
+    <property name="sun.boot.library.path" value="D:\java\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\TuringMachine"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="PL"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="test" value="pl.polsl.tomasz.michalik.model.TuringMachineTest"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\TuringMachine"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="19.0.1+10-21"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\huawei\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="stderr.encoding" value="Cp1250"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="D:\netbeans\NetBeans-15\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="D:\netbeans\NetBeans-15\netbeans\java\maven\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="stdout.encoding" value="Cp1250"/>
+    <property name="java.library.path" value="D:\java\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;D:\Scripts\;D:\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\MinGW\bin;C:\Users\huawei\AppData\Local\Microsoft\WindowsApps;C:\cygwin64\bin;C:\Program Files\dotnet\;D:\bin;C;C:\texlive\2021\bin\win32;C:\Users\huawei\.dotnet\tools;C:\Program Files\doxygen\bin;;D:\python;C:\Ruby31-x64\bin;."/>
+    <property name="maven.conf" value="D:\netbeans\NetBeans-15\netbeans\java\maven/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="63.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="library.jansi.path" value="D:\netbeans\NetBeans-15\netbeans\java\maven\lib\jansi-native"/>
+    <property name="user.home" value="C:\Users\huawei"/>
+    <property name="user.timezone" value="Europe/Warsaw"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="19"/>
+    <property name="user.name" value="huawei"/>
+    <property name="java.class.path" value="D:\netbeans\NetBeans-15\netbeans\java\maven\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="19"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=pl.polsl.tomasz.michalik.model.TuringMachineTest -Dmaven.ext.class.path=D:\netbeans\NetBeans-15\netbeans\java\maven-nblib\netbeans-eventspy.jar surefire:test"/>
+    <property name="java.home" value="D:\java"/>
+    <property name="user.language" value="pl"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="19.0.1"/>
+    <property name="native.encoding" value="Cp1250"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="D:\netbeans\NetBeans-15\netbeans\java\maven"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-10-18"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="testAddBadOSymbolsTranstion{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.116"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.004"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.004"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.004"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadOSymbolsTranstion{int}[7]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadSymbolTransition{String}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.005"/>
+  <testcase name="testAddBadSymbolTransition{String}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadSymbolTransition{String}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadSymbolTransition{String}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.004"/>
+  <testcase name="testAddBadSymbolTransition{String}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddBadSymbolTransition{String}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.015"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadISymbolsTranstion{int}[7]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.016"/>
+  <testcase name="testAddBadOMovesTranstion{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadOMovesTranstion{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadOMovesTranstion{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.016"/>
+  <testcase name="testAddBadOMovesTranstion{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadOMovesTranstion{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadOMovesTranstion{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddBadOMovesTranstion{int}[7]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.015"/>
+  <testcase name="checkLeftBlank" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="checkRightBlank" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0"/>
+  <testcase name="testAddNTapesTransition{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.016"/>
+  <testcase name="testAddNTapesTransition{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddNTapesTransition{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testAddNTapesTransition{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddNTapesTransition{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testAddNTapesTransition{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testAddNTapesTransition{int}[7]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.004"/>
+  <testcase name="testMoveLeft{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testMoveLeft{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testMoveLeft{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testMoveLeft{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testMoveLeft{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testMoveLeft{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.046"/>
+  <testcase name="testAddEmptyTransition" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0">
+    <skipped message="this situation is artifitial and there has no place in the current project"/>
+  </testcase>
+  <testcase name="testMoveRight{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testMoveRight{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testMoveRight{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testMoveRight{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testMoveRight{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testMoveRight{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.065"/>
+  <testcase name="testNotMove{int}[1]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testNotMove{int}[2]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testNotMove{int}[3]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testNotMove{int}[4]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.003"/>
+  <testcase name="testNotMove{int}[5]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.002"/>
+  <testcase name="testNotMove{int}[6]" classname="pl.polsl.tomasz.michalik.model.TuringMachineTest" time="0.018"/>
+</testsuite>

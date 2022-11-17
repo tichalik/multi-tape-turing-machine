@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import  org.junit.jupiter.params.ParameterizedTest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.ValueSource;
 import pl.polsl.tomasz.michalik.controller.TMReader;
@@ -16,7 +17,8 @@ import pl.polsl.tomasz.michalik.exceptions.TMException;
 
 /**
  *
- * @author huawei
+ * @author Tomasz Michalik
+ * @version 1.2
  */
 public class TuringMachineTest {
     
@@ -26,15 +28,6 @@ public class TuringMachineTest {
         tmr = new TMReader();
     }
     
-    /**
-     * this is a test-test
-     * to show that for some reason the tests do not work
-     */
-    @Test
-    public void test()
-    {
-        fail();
-    }
     
     
     /**
@@ -49,10 +42,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
@@ -75,10 +65,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\moveRight.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
@@ -101,10 +88,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\noMove.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
@@ -122,15 +106,14 @@ public class TuringMachineTest {
      * 
      */
     @org.junit.jupiter.api.Test
+    @Disabled("this situation is artifitial and there has no place in the current project")
     public void testAddEmptyTransition() {
+        Boolean wasExceptionThrown = false;
         //GIVEN
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
@@ -139,11 +122,11 @@ public class TuringMachineTest {
             instance.addTransition(t);
            //THEN it shoud be caught
         }catch (TMException ex ){
-            
+            wasExceptionThrown = true;
         }
-        //else if not caught 
-        fail("no exception was thrown");
-        
+        if (!wasExceptionThrown){
+           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+        }
     }
     
     /**
@@ -154,14 +137,12 @@ public class TuringMachineTest {
     @ParameterizedTest
     @ValueSource (ints = {1,2,4,10,0,-2,-3})
     public void testAddBadISymbolsTranstion(int noTapes) {
+        Boolean wasExceptionThrown = false;
         //GIVEN
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         try{
@@ -181,11 +162,11 @@ public class TuringMachineTest {
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
            //THEN it shoud be caught
         }catch (TMException ex ){
-            
+             wasExceptionThrown = true;
         }
-        //else if not caught 
-        fail("no exception was thrown");
-        
+        if (!wasExceptionThrown){
+           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+        }
     }
     
     
@@ -197,14 +178,12 @@ public class TuringMachineTest {
     @ParameterizedTest
     @ValueSource (ints = {1,2,4,10,0,-2,-3})
     public void testAddBadOSymbolsTranstion(int noTapes) {
+        Boolean wasExceptionThrown = false;
         //GIVEN
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         try{
@@ -224,10 +203,12 @@ public class TuringMachineTest {
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
            //THEN it shoud be caught
         }catch (TMException ex ){
-            
+            wasExceptionThrown = true;
         }
-        //else if not caught 
-        fail("no exception was thrown");
+        if (!wasExceptionThrown){
+            fail("no exception should be thrown; was thrown:" + ex.getMessage());
+        }
+        
         
     }
     
@@ -239,14 +220,12 @@ public class TuringMachineTest {
     @ParameterizedTest
     @ValueSource (ints = {1,2,4,10,0,-2,-3})
     public void testAddBadOMovesTranstion(int noTapes) {
+        Boolean wasExceptionThrown = false;
         //GIVEN
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         try{
@@ -266,11 +245,12 @@ public class TuringMachineTest {
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
            //THEN it shoud be caught
         }catch (TMException ex ){
-            
+             wasExceptionThrown = true;
         }
         //else if not caught 
-        fail("no exception was thrown");
-        
+        if (!wasExceptionThrown){
+           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+        }
     }
     
     
@@ -287,10 +267,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         try{
@@ -308,8 +285,8 @@ public class TuringMachineTest {
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
            //THEN it shoud be caught
         }catch (TMException ex ){
-            if (noTapes>0){
-                fail("no exception should be thrown");
+            if (noTapes==2){                
+                fail("no exception should be thrown; was thrown:" + ex.getMessage());
             }
         }
         //else if not caught 
@@ -326,10 +303,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\input.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         try{
@@ -363,10 +337,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         ArrayList<ArrayList<String>> tapeContents = new ArrayList<>();
@@ -399,10 +370,7 @@ public class TuringMachineTest {
         try{
             instance = tmr.readTMFromFile("input_files\\moveRight.txt");
         }
-        catch (FileNotFoundException ex){
-            fail("something went wrong with the test itsllf, check for filename");
-        }
-        catch (TMException ex){
+        catch (Exception ex){
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         ArrayList<ArrayList<String>> tapeContents = new ArrayList<>();

@@ -8,7 +8,7 @@ package pl.polsl.tomasz.michalik.model;
 import java.util.ArrayList;
 
 /** class representing tape of the turing machine
- * @version 2.0
+ * @version 2.2
  * @author Tomasz Michalik
  */
 public class Tape {
@@ -64,6 +64,9 @@ public class Tape {
      * @return the current symbol
      */
     public String getCurrentSymbol(){
+        if (contents.size()==0){
+            contents.add(blank);
+        }
         return contents.get(position);
     }
     

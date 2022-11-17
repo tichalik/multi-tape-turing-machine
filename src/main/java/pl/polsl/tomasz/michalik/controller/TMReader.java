@@ -22,7 +22,7 @@ import pl.polsl.tomasz.michalik.model.TuringMachine;
 /**
  * Reads a turing machine configuration from a given input
  * @author Tomasz Michalik
- * @version 1.0
+ * @version 1.2
  */
 public class TMReader {
     /**

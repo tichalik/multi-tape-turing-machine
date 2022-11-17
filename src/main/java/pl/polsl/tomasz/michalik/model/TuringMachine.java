@@ -12,7 +12,7 @@ import pl.polsl.tomasz.michalik.exceptions.*;
 /**
  * class representing the turing machine
  * @author Tomasz Michalik
- * @version 2.0
+ * @version 2.2
  */
 
 public class TuringMachine {
@@ -134,14 +134,25 @@ public class TuringMachine {
      * @throws TMException  in case of any error
      */
     public void addTransition(Transition t) throws TMException{
-        if (t.getResultSymbols().size()!= noTapes
-                || t.getInitialSymbols().size() != noTapes
-                || t.getResultMoves().size() != noTapes){
-            throw new TMException("the symbols in the transitions don't match number of tapes of the machine");
+        if (t.getResultSymbols().size()!= noTapes){
+            throw new TMException("incompatible size of result symbols: "+
+                    t.getResultSymbols().size() + " should be " + noTapes);
         }
-        if (!states.contains(t.getInitialState())
-                || !states.contains(t.getResultState())){
-            throw new TMException("there's no such state in the machine's set ");
+        if (t.getInitialSymbols().size() != noTapes){
+            throw new TMException("incompatible size of initial symbols: "+
+                    t.getInitialSymbols().size() + " should be " + noTapes);
+        }
+        if ( t.getResultMoves().size() != noTapes){
+            throw new TMException("incompatible size of moves: "+
+                    t.getResultMoves().size() + " should be " + noTapes);
+        }
+        if (!states.contains(t.getInitialState())){    
+            throw new TMException("there's no" +
+                    t.getInitialState() + "state in the machine's set ");
+        }
+        if(!states.contains(t.getResultState())){
+            throw new TMException("there's no" +
+                    t.getResultState() + "state in the machine's set ");
         }
         transitions.add(t);
         
