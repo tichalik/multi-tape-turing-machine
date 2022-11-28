@@ -5,7 +5,6 @@
 package pl.polsl.tomasz.michalik.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +91,7 @@ public class TMReader {
             tM.setInitialState(machineInitialState);
 
             //reading the tape contents
+            int maxLineSize = 0;
             for(int i=0; i<noTapes; i++){
                 if (!scanner.hasNextLine()){
                     throw new FileFormatException("undefined tape contents for tape" 
@@ -100,6 +100,7 @@ public class TMReader {
                 ArrayList<String> tmp = new ArrayList<>();
                 addAll(tmp, scanner.nextLine().split(" "));
                 tapeContents.add(tmp);
+                
             }
 
             tM.setTapes(tapeContents);

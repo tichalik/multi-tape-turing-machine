@@ -125,7 +125,7 @@ public class TuringMachineTest {
             wasExceptionThrown = true;
         }
         if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+           fail("no exception should be thrown; was thrown:" );
         }
     }
     
@@ -165,7 +165,7 @@ public class TuringMachineTest {
              wasExceptionThrown = true;
         }
         if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+           fail("no exception should be thrown; was thrown:" );
         }
     }
     
@@ -206,7 +206,7 @@ public class TuringMachineTest {
             wasExceptionThrown = true;
         }
         if (!wasExceptionThrown){
-            fail("no exception should be thrown; was thrown:" + ex.getMessage());
+            fail("no exception should be thrown; was thrown:" );
         }
         
         
@@ -249,7 +249,7 @@ public class TuringMachineTest {
         }
         //else if not caught 
         if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" + ex.getMessage());
+           fail("no exception should be thrown; was thrown:" );
         }
     }
     

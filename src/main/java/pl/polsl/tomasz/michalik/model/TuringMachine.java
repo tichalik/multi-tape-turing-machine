@@ -12,7 +12,7 @@ import pl.polsl.tomasz.michalik.exceptions.*;
 /**
  * class representing the turing machine
  * @author Tomasz Michalik
- * @version 2.2
+ * @version 2.3
  */
 
 public class TuringMachine {
@@ -84,6 +84,7 @@ public class TuringMachine {
         for (int i=0; i<noTapes; i++){
             this.tapes.add(new Tape(blank));
         }
+        this.blank = blank;
     }
     
     /**
@@ -156,6 +157,10 @@ public class TuringMachine {
         }
         transitions.add(t);
         
+    }
+
+    public String getBlank() {
+        return blank;
     }
     
 }

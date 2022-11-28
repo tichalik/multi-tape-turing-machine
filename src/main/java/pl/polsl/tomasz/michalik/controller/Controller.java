@@ -4,6 +4,7 @@ package pl.polsl.tomasz.michalik.controller;
 import java.util.Scanner;
 import pl.polsl.tomasz.michalik.exceptions.*;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
+import pl.polsl.tomasz.michalik.view.GUI;
 import pl.polsl.tomasz.michalik.view.TuringMachineView;
 
 
@@ -17,7 +18,7 @@ import pl.polsl.tomasz.michalik.view.TuringMachineView;
 /** the controller class, has the app;s main method
  *
  * @author Tomasz Michalik
- * @version 2.2
+ * @version 3.0
  */
 public class Controller {
     /** main method controlling entire app
@@ -48,19 +49,27 @@ public class Controller {
             System.out.println(ex.getMessage());
         }
         
-        //managing the view
-        TuringMachineView view = new TuringMachineView();
+        GUI tmGUI = new GUI();
+        System.out.println(turingMachine.getBlank());
+        tmGUI.setBlank(turingMachine.getBlank());
+        tmGUI.showTapes(turingMachine.getTapes());
+        tmGUI.run();
         
-        Scanner scanner = new Scanner(System.in);
         
-        Boolean goOn = true;
-        while (goOn){
-            view.showCurrentState(turingMachine.getCurrentState());
-            view.showTapes(turingMachine.getTapes());
-            System.out.println("continue? [y/n]");
-            goOn = "y".equals(scanner.nextLine());
-            turingMachine.next();
-        }
+        
+//        //managing the view
+//        TuringMachineView view = new TuringMachineView();
+//        
+//        Scanner scanner = new Scanner(System.in);
+//        
+//        Boolean goOn = true;
+//        while (goOn){
+//            view.showCurrentState(turingMachine.getCurrentState());
+//            view.showTapes(turingMachine.getTapes());
+//            System.out.println("continue? [y/n]");
+//            goOn = "y".equals(scanner.nextLine());
+//            turingMachine.next();
+//        }
         
     }
 }
