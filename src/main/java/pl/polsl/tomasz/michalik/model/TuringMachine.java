@@ -102,6 +102,8 @@ public class TuringMachine {
             if (t.getInitialState().equals(currentState) && 
                     t.getInitialSymbols().equals( currentSymbols ))
             {
+                currentState = t.getResultState();
+                
                 ArrayList<Move> resultMoves = t.getResultMoves();
                 ArrayList<String> resultSymbols = t.getResultSymbols();
                 

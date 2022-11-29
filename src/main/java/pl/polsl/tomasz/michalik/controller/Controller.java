@@ -50,9 +50,9 @@ public class Controller {
         }
         
         GUI tmGUI = new GUI();
-        System.out.println(turingMachine.getBlank());
         tmGUI.setBlank(turingMachine.getBlank());
         tmGUI.showTapes(turingMachine.getTapes());
+        tmGUI.showCurrentState(turingMachine.getCurrentState());
         tmGUI.run();
         
         
@@ -60,16 +60,17 @@ public class Controller {
 //        //managing the view
 //        TuringMachineView view = new TuringMachineView();
 //        
-//        Scanner scanner = new Scanner(System.in);
-//        
-//        Boolean goOn = true;
-//        while (goOn){
-//            view.showCurrentState(turingMachine.getCurrentState());
-//            view.showTapes(turingMachine.getTapes());
-//            System.out.println("continue? [y/n]");
-//            goOn = "y".equals(scanner.nextLine());
-//            turingMachine.next();
-//        }
+        Scanner scanner = new Scanner(System.in);
+        
+        Boolean goOn = true;
+        while (goOn){
+            tmGUI.showCurrentState(turingMachine.getCurrentState());
+            tmGUI.showTapes(turingMachine.getTapes());
+            System.out.println(turingMachine.getCurrentState());
+            System.out.println("continue? [y/n]");
+            goOn = "y".equals(scanner.nextLine());
+            turingMachine.next();
+        }
         
     }
 }

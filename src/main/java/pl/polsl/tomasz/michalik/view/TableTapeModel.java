@@ -6,6 +6,7 @@ package pl.polsl.tomasz.michalik.view;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 import pl.polsl.tomasz.michalik.model.Tape;
 
 /**
@@ -18,58 +19,80 @@ class TapeTableModel extends AbstractTableModel {
     public TapeTableModel() {
         tapes = new ArrayList<>();
         data = new ArrayList<>();
+
+        headers = new ArrayList<>();
+        Integer halfColumns = numberOfColumns / 2;
+        for (Integer i = 0; i < numberOfColumns; i++) {
+            Integer result = i - halfColumns;
+            headers.add(result.toString());
+        }
+        headers.set(halfColumns, "V");
+        
     }
 
     private ArrayList<Tape> tapes;
     private String blank;
     ArrayList<ArrayList<String>> data;
     private final int numberOfColumns = 9;
+    private ArrayList<String> headers;
 
+  
+    
     private void update() {
         final int halfColumns = numberOfColumns / 2;
         data = new ArrayList<>();
         for (Tape t : tapes) {
             ArrayList<String> row = new ArrayList<>(numberOfColumns);
-            for (int i =0; i<numberOfColumns; i++){
+            for (int i = 0; i < numberOfColumns; i++) {
                 row.add(new String());
             }
             ArrayList<String> contents = t.getContents();
 
-           
             //setting the columns to the left of current position
             {
                 int cPos = t.getPosition();
-                int rPos = halfColumns + 1;
+                int rPos = halfColumns;
                 while (cPos >= 0 && rPos >= 0) {
                     row.set(rPos, contents.get(cPos));
                     rPos--;
                     cPos--;
                 }
-                while(rPos>=0){
+                while (rPos >= 0) {
                     row.set(rPos, blank);
-                    rPos --;
+                    rPos--;
                 }
             }
-            
+
             //setting the columns to the right of current position
             {
                 int cPos = t.getPosition();
-                int rPos = halfColumns + 1;
+                int rPos = halfColumns;
                 while (cPos < contents.size() && rPos < numberOfColumns) {
                     row.set(rPos, contents.get(cPos));
                     rPos++;
                     cPos++;
                 }
-                while(rPos<numberOfColumns){
+                while (rPos < numberOfColumns) {
                     row.set(rPos, blank);
-                    rPos ++;
+                    rPos++;
                 }
             }
             data.add(row);
-            
+
         }
+        fireTableDataChanged();
     }
 
+    /**
+     * responsible for showing the column headers
+     * 
+     * @param index index of the column
+     * @return  name of the column
+     */
+    @Override
+    public String getColumnName(int index) {
+        return headers.get(index);
+    }
 
     /**
      * change occured on the external tapes and it needs to be transmited into
@@ -114,14 +137,15 @@ class TapeTableModel extends AbstractTableModel {
     }
 
     /**
-     * access to table cells 
+     * access to table cells
+     *
      * @param rowIndex picking a row
      * @param columnIndex picking a column
      * @return the value stored in the table
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return blank;
+        return data.get(rowIndex).get(columnIndex);
     }
 
 }

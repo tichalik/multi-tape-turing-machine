@@ -6,6 +6,7 @@ package pl.polsl.tomasz.michalik.view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import pl.polsl.tomasz.michalik.model.Tape;
 
 /**
@@ -56,7 +57,7 @@ public class GUI extends javax.swing.JFrame {
     /**
      * shows tapes of the turing machine
      *
-     * @param tapes tapes of the turing machine
+     * @param newTapes tapes of the turing machine
      */
     public void showTapes(ArrayList<Tape> newTapes) {
         tapes = newTapes;
@@ -69,7 +70,7 @@ public class GUI extends javax.swing.JFrame {
      * @param state state of the turing machine
      */
     public void showCurrentState(String state) {
-
+        lCurrentState.setText(state);
     }
 
     public void setBlank(String newBlank) {
@@ -89,6 +90,7 @@ public class GUI extends javax.swing.JFrame {
         tapeTableModel = new TapeTableModel();
 
         initComponents();
+        
     }
 
     
@@ -112,6 +114,8 @@ public class GUI extends javax.swing.JFrame {
         lTmpResults = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tapeTable = new javax.swing.JTable();
+        lStaticCurrentState = new javax.swing.JLabel();
+        lCurrentState = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +148,8 @@ public class GUI extends javax.swing.JFrame {
         tapeTable.setModel(tapeTableModel);
         jScrollPane1.setViewportView(tapeTable);
 
+        lStaticCurrentState.setText("current state:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,9 +176,15 @@ public class GUI extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(sNumberOfStates, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(bApplyChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(lTmpResults, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(107, 107, 107)
+                                    .addComponent(lStaticCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(81, 81, 81)
+                                    .addComponent(lTmpResults, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 64, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -195,9 +207,13 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(bApplyChanges))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lTmpResults, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lStaticCurrentState)
+                    .addComponent(lCurrentState))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         pack();
@@ -267,8 +283,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton bApplyChanges;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lBlankSymbol;
+    private javax.swing.JLabel lCurrentState;
     private javax.swing.JLabel lNumberOfStates;
     private javax.swing.JLabel lNumberOfTapes;
+    private javax.swing.JLabel lStaticCurrentState;
     private javax.swing.JLabel lTmpResults;
     private javax.swing.JSpinner sNumberOfStates;
     private javax.swing.JSpinner sNumberOfTapes;
