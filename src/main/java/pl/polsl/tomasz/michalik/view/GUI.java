@@ -1,18 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pl.polsl.tomasz.michalik.view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableColumn;
 import pl.polsl.tomasz.michalik.controller.Controller;
 import pl.polsl.tomasz.michalik.model.Tape;
 
 /**
+ * Graphical User Interface
  *
- * @author huawei
+ * @author Tomasz Michalik
+ * @version 1.0
  */
 public class GUI extends javax.swing.JFrame {
 
@@ -59,8 +56,8 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
 
     }
-    
-    public void reporError(String message){
+
+    public void reporError(String message) {
         JOptionPane.showMessageDialog(this, message, "error", HEIGHT);
     }
 
@@ -234,7 +231,7 @@ public class GUI extends javax.swing.JFrame {
         //</editor-fold>
 
         this.setVisible(true);
-  
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

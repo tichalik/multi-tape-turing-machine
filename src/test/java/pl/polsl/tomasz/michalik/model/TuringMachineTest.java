@@ -1,156 +1,158 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package pl.polsl.tomasz.michalik.model;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import  org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.ParameterizedTest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.ValueSource;
 import pl.polsl.tomasz.michalik.controller.TMReader;
 import pl.polsl.tomasz.michalik.exceptions.TMException;
 
 /**
+ * tests for the model
  *
  * @author Tomasz Michalik
  * @version 1.2
  */
 public class TuringMachineTest {
-    
+
     TMReader tmr;
     TuringMachine instance;
+
     public TuringMachineTest() {
         tmr = new TMReader();
     }
-    
-    
-    
+
     /**
      * Test for moving to the left
+     *
      * @param noSteps nubmer of steps
+     * @throws pl.polsl.tomasz.michalik.exceptions.TMException
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,3,10,50,100000})
-    
+    @ValueSource(ints = {1, 2, 3, 10, 50, 100000})
+
     public void testMoveLeft(int noSteps) {
         //GIVEN 
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
-        for (int i =0; i<noSteps; i++){
-            instance.next();
+        for (int i = 0; i < noSteps; i++) {
+            try {
+                instance.next();
+            } catch (TMException ex) {
+            }
         }
         //THEN
-        
-        //noting -- if there was no exception everything works
-    }
-    
-    /**
-     * Test for moving to the right
-     * @param noSteps number of steps
-     */
-    @ParameterizedTest
-    @ValueSource (ints = {1,2,3,10,50,100000})
-    public void testMoveRight(int noSteps) {
-        //GIVEN 
-        try{
-            instance = tmr.readTMFromFile("input_files\\moveRight.txt");
-        }
-        catch (Exception ex){
-            fail("something went wrong with hte test tislef, the input file has bugs");
-        }
-        //WHEN
-        for (int i =0; i<noSteps; i++){
-            instance.next();
-        }
-        //THEN
-        
+
         //noting -- if there was no exception everything works
     }
 
     /**
-     * Test for not moving 
+     * Test for moving to the right
+     *
      * @param noSteps number of steps
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,3,10,50,100000})
-    public void testNotMove(int noSteps) {
+    @ValueSource(ints = {1, 2, 3, 10, 50, 100000})
+    public void testMoveRight(int noSteps) {
         //GIVEN 
-        try{
-            instance = tmr.readTMFromFile("input_files\\noMove.txt");
-        }
-        catch (Exception ex){
+        try {
+            instance = tmr.readTMFromFile("input_files\\moveRight.txt");
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
-        for (int i =0; i<noSteps; i++){
-            instance.next();
+        for (int i = 0; i < noSteps; i++) {
+            try {
+                instance.next();
+            } catch (TMException ex) {
+            }
         }
         //THEN
-        
+
         //noting -- if there was no exception everything works
     }
-    
+
     /**
-     * Test adding null transition
-     * there is no need to parametrize this!!!!
-     * 
+     * Test for not moving
+     *
+     * @param noSteps number of steps
+     */
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 10, 50, 100000})
+    public void testNotMove(int noSteps) {
+        //GIVEN 
+        try {
+            instance = tmr.readTMFromFile("input_files\\noMove.txt");
+        } catch (Exception ex) {
+            fail("something went wrong with hte test tislef, the input file has bugs");
+        }
+        //WHEN
+        for (int i = 0; i < noSteps; i++) {
+            try {
+                instance.next();
+            } catch (TMException ex) {
+            }
+        }
+        //THEN
+
+        //noting -- if there was no exception everything works
+    }
+
+    /**
+     * Test adding null transition there is no need to parametrize this!!!!
+     *
      */
     @org.junit.jupiter.api.Test
     @Disabled("this situation is artifitial and there has no place in the current project")
     public void testAddEmptyTransition() {
         Boolean wasExceptionThrown = false;
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         //WHEN
-        Transition t  = new Transition(0,null, null, null, null, null);
-        try{
+        Transition t = new Transition(0, null, null, null, null, null);
+        try {
             instance.addTransition(t);
-           //THEN it shoud be caught
-        }catch (TMException ex ){
+            //THEN it shoud be caught
+        } catch (TMException ex) {
             wasExceptionThrown = true;
         }
-        if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" );
+        if (!wasExceptionThrown) {
+            fail("no exception should be thrown; was thrown:");
         }
     }
-    
+
     /**
-     * 
+     *
      * Test adding transition with a wrong size of iSymbols
+     *
      * @param noTapes nubmer of tapes
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,4,10,0,-2,-3})
+    @ValueSource(ints = {1, 2, 4, 10, 0, -2, -3})
     public void testAddBadISymbolsTranstion(int noTapes) {
         Boolean wasExceptionThrown = false;
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
-        try{
+        try {
             ArrayList<String> iSymbols = new ArrayList<>();
             ArrayList<String> oSymbols = new ArrayList<>();
             ArrayList<Move> oMoves = new ArrayList<>();
-            
-            for (int i =0; i<noTapes; i++){
+
+            for (int i = 0; i < noTapes; i++) {
                 iSymbols.add("0");
                 oSymbols.add("0");
                 oMoves.add(Move.R);
@@ -160,38 +162,37 @@ public class TuringMachineTest {
             //WHEN
             instance.addTransition(
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
-           //THEN it shoud be caught
-        }catch (TMException ex ){
-             wasExceptionThrown = true;
+            //THEN it shoud be caught
+        } catch (TMException ex) {
+            wasExceptionThrown = true;
         }
-        if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" );
+        if (!wasExceptionThrown) {
+            fail("no exception should be thrown; was thrown:");
         }
     }
-    
-    
+
     /**
-     * 
+     *
      * Test adding transition with a wrong size of oSymbols
+     *
      * @param noTapes nubmer of tapes
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,4,10,0,-2,-3})
+    @ValueSource(ints = {1, 2, 4, 10, 0, -2, -3})
     public void testAddBadOSymbolsTranstion(int noTapes) {
         Boolean wasExceptionThrown = false;
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
-        try{
+        try {
             ArrayList<String> iSymbols = new ArrayList<>();
             ArrayList<String> oSymbols = new ArrayList<>();
             ArrayList<Move> oMoves = new ArrayList<>();
-            
-            for (int i =0; i<noTapes; i++){
+
+            for (int i = 0; i < noTapes; i++) {
                 iSymbols.add("0");
                 oSymbols.add("0");
                 oMoves.add(Move.R);
@@ -201,39 +202,38 @@ public class TuringMachineTest {
             //WHEN
             instance.addTransition(
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
-           //THEN it shoud be caught
-        }catch (TMException ex ){
+            //THEN it shoud be caught
+        } catch (TMException ex) {
             wasExceptionThrown = true;
         }
-        if (!wasExceptionThrown){
-            fail("no exception should be thrown; was thrown:" );
+        if (!wasExceptionThrown) {
+            fail("no exception should be thrown; was thrown:");
         }
-        
-        
+
     }
-    
+
     /**
-     * 
+     *
      * Test adding transition with a wrong size of iSymbols
+     *
      * @param noTapes nubmer of tapes
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,4,10,0,-2,-3})
+    @ValueSource(ints = {1, 2, 4, 10, 0, -2, -3})
     public void testAddBadOMovesTranstion(int noTapes) {
         Boolean wasExceptionThrown = false;
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
-        try{
+        try {
             ArrayList<String> iSymbols = new ArrayList<>();
             ArrayList<String> oSymbols = new ArrayList<>();
             ArrayList<Move> oMoves = new ArrayList<>();
-            
-            for (int i =0; i<noTapes; i++){
+
+            for (int i = 0; i < noTapes; i++) {
                 iSymbols.add("0");
                 oSymbols.add("0");
                 oMoves.add(Move.R);
@@ -243,39 +243,36 @@ public class TuringMachineTest {
             //WHEN
             instance.addTransition(
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
-           //THEN it shoud be caught
-        }catch (TMException ex ){
-             wasExceptionThrown = true;
+            //THEN it shoud be caught
+        } catch (TMException ex) {
+            wasExceptionThrown = true;
         }
         //else if not caught 
-        if (!wasExceptionThrown){
-           fail("no exception should be thrown; was thrown:" );
+        if (!wasExceptionThrown) {
+            fail("no exception should be thrown; was thrown:");
         }
     }
-    
-    
-    
-    
+
     /**
      * Test adding n-tape transtion
+     *
      * @param noTapes number of tapes
      */
     @ParameterizedTest
-    @ValueSource (ints = {1,2,4,10,0,-2,-3})
+    @ValueSource(ints = {1, 2, 4, 10, 0, -2, -3})
     public void testAddNTapesTransition(int noTapes) {
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
-        try{
+        try {
             ArrayList<String> iSymbols = new ArrayList<>();
             ArrayList<String> oSymbols = new ArrayList<>();
             ArrayList<Move> oMoves = new ArrayList<>();
-            
-            for (int i =0; i<noTapes; i++){
+
+            for (int i = 0; i < noTapes; i++) {
                 iSymbols.add("0");
                 oSymbols.add("0");
                 oMoves.add(Move.R);
@@ -283,35 +280,36 @@ public class TuringMachineTest {
             //WHEN
             instance.addTransition(
                     new Transition(noTapes, "a", iSymbols, "a", oSymbols, oMoves));
-           //THEN it shoud be caught
-        }catch (TMException ex ){
-            if (noTapes==2){                
+            //THEN it shoud be caught
+        } catch (TMException ex) {
+            if (noTapes == 2) {
                 fail("no exception should be thrown; was thrown:" + ex.getMessage());
             }
         }
         //else if not caught 
-        
+
     }
+
     /**
      * Test addign transition with bad symbols
+     *
      * @param initialState initial state of the machine
      */
     @ParameterizedTest
-    @ValueSource (strings = {"0","1", "a","b","c", "  asdfasdfasfasf"})
+    @ValueSource(strings = {"0", "1", "a", "b", "c", "  asdfasdfasfasf"})
     public void testAddBadSymbolTransition(String initialState) {
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\input.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
-        try{
+        try {
             ArrayList<String> iSymbols = new ArrayList<>();
             ArrayList<String> oSymbols = new ArrayList<>();
             ArrayList<Move> oMoves = new ArrayList<>();
-            
-            for (int i =0; i<10; i++){
+
+            for (int i = 0; i < 10; i++) {
                 iSymbols.add("0");
                 oSymbols.add("0");
                 oMoves.add(Move.R);
@@ -319,78 +317,81 @@ public class TuringMachineTest {
             //WHEN
             instance.addTransition(
                     new Transition(10, initialState, iSymbols, "a", oSymbols, oMoves));
-           //THEN it shoud be caught
-        }catch (TMException ex ){
-            
+            //THEN it shoud be caught
+        } catch (TMException ex) {
+
         }
         //else if not caught 
     }
-    
-    
+
     /**
-     * Test moving to the blank symbol to the left of the tape
-     * THERE'S MO NEED TO PARAMETRIZE THIS!!
+     * Test moving to the blank symbol to the left of the tape THERE'S MO NEED
+     * TO PARAMETRIZE THIS!!
      */
     @org.junit.jupiter.api.Test
     public void checkLeftBlank() {
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\moveLeft.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         ArrayList<ArrayList<String>> tapeContents = new ArrayList<>();
         tapeContents.add(new ArrayList<>());
         tapeContents.add(new ArrayList<>());
-        
+
         instance.setTapes(tapeContents);
         //WHEN 
-        instance.next();
+        try {
+            instance.next();
+        } catch (TMException ex) {
+        }
         //THEN
         ArrayList<Tape> tapes = instance.getTapes();
         ArrayList<String> currentSymbols = new ArrayList<>();
-        for (int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             currentSymbols.add(tapes.get(i).getCurrentSymbol());
         }
         ArrayList<String> expected = new ArrayList<>();
         expected.add("0");
         expected.add("0");
-        
-        assumeTrue(currentSymbols.equals(expected ));
-        
+
+        assumeTrue(currentSymbols.equals(expected));
+
     }
-    
+
     /**
      * Test moving to the blank symbol to the right of the tape
      */
     @org.junit.jupiter.api.Test
     public void checkRightBlank() {
         //GIVEN
-        try{
+        try {
             instance = tmr.readTMFromFile("input_files\\moveRight.txt");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             fail("something went wrong with hte test tislef, the input file has bugs");
         }
         ArrayList<ArrayList<String>> tapeContents = new ArrayList<>();
         tapeContents.add(new ArrayList<>());
         tapeContents.add(new ArrayList<>());
-        
+
         instance.setTapes(tapeContents);
         //WHEN 
-        instance.next();
+        try {
+            instance.next();
+        } catch (TMException ex) {
+        }
         //THEN
         ArrayList<Tape> tapes = instance.getTapes();
         ArrayList<String> currentSymbols = new ArrayList<>();
-        for (int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             currentSymbols.add(tapes.get(i).getCurrentSymbol());
         }
         ArrayList<String> expected = new ArrayList<>();
         expected.add("0");
         expected.add("0");
-        
-        assumeTrue(currentSymbols.equals(expected ));
+
+        assumeTrue(currentSymbols.equals(expected));
     }
-    
+
 }

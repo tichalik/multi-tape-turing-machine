@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pl.polsl.tomasz.michalik.model;
 
 import java.util.ArrayList;
@@ -11,12 +7,12 @@ import pl.polsl.tomasz.michalik.exceptions.*;
 
 /**
  * class representing the turing machine
+ *
  * @author Tomasz Michalik
- * @version
+ * @version 3.0
  */
-
 public class TuringMachine {
-    
+
     /**
      * number of tapes
      */
@@ -25,51 +21,57 @@ public class TuringMachine {
      * collection of tapes
      */
     private ArrayList<Tape> tapes;
-    
+
     /**
      * blank symbol on the tapes
      */
     private String blank;
 
-    /** gets the tapes of the turing machine
-     * 
+    /**
+     * gets the tapes of the turing machine
+     *
      * @return tapes of the machine
      */
     public ArrayList<Tape> getTapes() {
         return tapes;
     }
 
-    /** gets the current state of TM
-     * 
+    /**
+     * gets the current state of TM
+     *
      * @return surrent state of TM
      */
     public String getCurrentState() {
         return currentState;
     }
-    
-    /** collection of transtions
-     * 
+
+    /**
+     * collection of transtions
+     *
      */
     ArrayList<Transition> transitions = new ArrayList<>();
-    /** current state of the machine
-     * 
+    /**
+     * current state of the machine
+     *
      */
     String currentState;
-    /** all states of hte machine
-     * 
+    /**
+     * all states of hte machine
+     *
      */
     Set<String> states;
 
     /**
-     * dummy constructor 
-     * 
+     * dummy constructor
+     *
      */
-    public TuringMachine(){
+    public TuringMachine() {
         noTapes = 0;
     }
-    
+
     /**
      * oonstructor
+     *
      * @param noTapes number of tapes the machine has
      * @param states internal states
      * @param blank blank state on the tapes
@@ -77,97 +79,99 @@ public class TuringMachine {
     public TuringMachine(int noTapes, ArrayList<String> states, String blank) {
         this.noTapes = noTapes;
         this.states = new HashSet<>();
-        for (String s: states){
+        for (String s : states) {
             this.states.add(s);
         }
         this.tapes = new ArrayList<>();
-        for (int i=0; i<noTapes; i++){
+        for (int i = 0; i < noTapes; i++) {
             this.tapes.add(new Tape(blank));
         }
         this.blank = blank;
     }
-    
+
     /**
      * executes one step of turing machine
      */
-    public void next() throws TMException{
+    public void next() throws TMException {
         ArrayList<String> currentSymbols = new ArrayList<>();
-        for (int i=0; i<noTapes; i++){
+        for (int i = 0; i < noTapes; i++) {
             currentSymbols.add(tapes.get(i).getCurrentSymbol());
         }
-            
+
         boolean foundTransition = false;
-        for (Transition t: transitions)
-        {
-            if (t.getInitialState().equals(currentState) && 
-                    t.getInitialSymbols().equals( currentSymbols ))
-            {
+        for (Transition t : transitions) {
+            if (t.getInitialState().equals(currentState)
+                    && t.getInitialSymbols().equals(currentSymbols)) {
                 foundTransition = true;
                 currentState = t.getResultState();
-                
+
                 ArrayList<Move> resultMoves = t.getResultMoves();
                 ArrayList<String> resultSymbols = t.getResultSymbols();
-                
-                for (int i = 0; i<noTapes; i++)
+
+                for (int i = 0; i < noTapes; i++) {
                     tapes.get(i).move(resultMoves.get(i), resultSymbols.get(i));
+                }
             }
         }
-        if (!foundTransition){
+        if (!foundTransition) {
             throw new TMException("no matching transition could be found "
-            + "for state <" + currentState + "> and symbols " + currentSymbols.toString());
+                    + "for state <" + currentState + "> and symbols " + currentSymbols.toString());
         }
     }
-    
+
     /**
      * sets the contnet of the tapes
+     *
      * @param content array of size noTapes containing arrays of tape contents
      */
-    public void setTapes(ArrayList<ArrayList<String>> content){
-        for (int i =0; i<noTapes; i++){
+    public void setTapes(ArrayList<ArrayList<String>> content) {
+        for (int i = 0; i < noTapes; i++) {
             tapes.get(i).setContents(content.get(i));
         }
     }
+
     /**
      * sets the initial state
-     * @param initialState state to be set 
+     *
+     * @param initialState state to be set
      */
-    public void setInitialState(String initialState){
+    public void setInitialState(String initialState) {
         currentState = initialState;
     }
-    
-    
+
     /**
      * adding a transition into the machine
+     *
      * @param t the transition
-     * @throws TMException  in case of any error
+     * @throws TMException in case of any error
      */
-    public void addTransition(Transition t) throws TMException{
-        if (t.getResultSymbols().size()!= noTapes){
-            throw new TMException("incompatible size of result symbols: "+
-                    t.getResultSymbols().size() + " should be " + noTapes);
+    public void addTransition(Transition t) throws TMException {
+        if (t.getResultSymbols().size() != noTapes) {
+            throw new TMException("incompatible size of result symbols: "
+                    + t.getResultSymbols().size() + " should be " + noTapes);
         }
-        if (t.getInitialSymbols().size() != noTapes){
-            throw new TMException("incompatible size of initial symbols: "+
-                    t.getInitialSymbols().size() + " should be " + noTapes);
+        if (t.getInitialSymbols().size() != noTapes) {
+            throw new TMException("incompatible size of initial symbols: "
+                    + t.getInitialSymbols().size() + " should be " + noTapes);
         }
-        if ( t.getResultMoves().size() != noTapes){
-            throw new TMException("incompatible size of moves: "+
-                    t.getResultMoves().size() + " should be " + noTapes);
+        if (t.getResultMoves().size() != noTapes) {
+            throw new TMException("incompatible size of moves: "
+                    + t.getResultMoves().size() + " should be " + noTapes);
         }
-        if (!states.contains(t.getInitialState())){    
-            throw new TMException("there's no" +
-                    t.getInitialState() + "state in the machine's set ");
+        if (!states.contains(t.getInitialState())) {
+            throw new TMException("there's no"
+                    + t.getInitialState() + "state in the machine's set ");
         }
-        if(!states.contains(t.getResultState())){
-            throw new TMException("there's no" +
-                    t.getResultState() + "state in the machine's set ");
+        if (!states.contains(t.getResultState())) {
+            throw new TMException("there's no"
+                    + t.getResultState() + "state in the machine's set ");
         }
         transitions.add(t);
-        
+
     }
 
     public String getBlank() {
         return blank;
     }
-    
+
 }

@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pl.polsl.tomasz.michalik.view;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
 import pl.polsl.tomasz.michalik.model.Tape;
 
 /**
+ * Table representing tapes of the turing machine
  *
  * @author Tomasz Michalik
  * @version 1.0
@@ -27,7 +23,7 @@ class TapeTableModel extends AbstractTableModel {
             headers.add(result.toString());
         }
         headers.set(halfColumns, "V");
-        
+
     }
 
     private ArrayList<Tape> tapes;
@@ -36,8 +32,6 @@ class TapeTableModel extends AbstractTableModel {
     private final int numberOfColumns = 9;
     private ArrayList<String> headers;
 
-  
-    
     private void update() {
         final int halfColumns = numberOfColumns / 2;
         data = new ArrayList<>();
@@ -85,9 +79,9 @@ class TapeTableModel extends AbstractTableModel {
 
     /**
      * responsible for showing the column headers
-     * 
+     *
      * @param index index of the column
-     * @return  name of the column
+     * @return name of the column
      */
     @Override
     public String getColumnName(int index) {
