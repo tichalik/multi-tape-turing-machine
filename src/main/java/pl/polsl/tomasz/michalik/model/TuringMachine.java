@@ -12,7 +12,7 @@ import pl.polsl.tomasz.michalik.exceptions.*;
 /**
  * class representing the turing machine
  * @author Tomasz Michalik
- * @version 2.3
+ * @version
  */
 
 public class TuringMachine {
@@ -90,18 +90,19 @@ public class TuringMachine {
     /**
      * executes one step of turing machine
      */
-    public void next(){
+    public void next() throws TMException{
         ArrayList<String> currentSymbols = new ArrayList<>();
         for (int i=0; i<noTapes; i++){
             currentSymbols.add(tapes.get(i).getCurrentSymbol());
         }
             
-        
+        boolean foundTransition = false;
         for (Transition t: transitions)
         {
             if (t.getInitialState().equals(currentState) && 
                     t.getInitialSymbols().equals( currentSymbols ))
             {
+                foundTransition = true;
                 currentState = t.getResultState();
                 
                 ArrayList<Move> resultMoves = t.getResultMoves();
@@ -110,6 +111,10 @@ public class TuringMachine {
                 for (int i = 0; i<noTapes; i++)
                     tapes.get(i).move(resultMoves.get(i), resultSymbols.get(i));
             }
+        }
+        if (!foundTransition){
+            throw new TMException("no matching transition could be found "
+            + "for state <" + currentState + "> and symbols " + currentSymbols.toString());
         }
     }
     

@@ -7,6 +7,7 @@ package pl.polsl.tomasz.michalik.view;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
+import pl.polsl.tomasz.michalik.controller.Controller;
 import pl.polsl.tomasz.michalik.model.Tape;
 
 /**
@@ -15,44 +16,9 @@ import pl.polsl.tomasz.michalik.model.Tape;
  */
 public class GUI extends javax.swing.JFrame {
 
-    private String currentState;
     private ArrayList<Tape> tapes;
-    private String blank;
-    private int numberOfTapes;
-    private int numberOfStates;
-    private TapeTableModel tapeTableModel;
-
-    /**
-     * applies changes in mumber of tapes to the model
-     *
-     * @param newNumberOfTapes new number of tapes
-     */
-    private void updateNumberOfTapes(int newNumberOfTapes) {
-        numberOfTapes = newNumberOfTapes;
-        
-        
-    }
-    /**
-     * applies changes in mumber of states to the model
-     * 
-     * @param newNumberOfStates  new number of states
-     */
-    private void updateNumberOfStates(int newNumberOfStates){
-        numberOfStates = newNumberOfStates;
-        
-        
-    }
-    
-    /**
-     * applies change of blank symbol to the model
-     * 
-     * @param newBlank new blank symbol
-     */
-    private void updateBlank(String newBlank){
-        blank = newBlank;
-        
-        
-    }
+    private final TapeTableModel tapeTableModel;
+    private final Controller controller;
 
     /**
      * shows tapes of the turing machine
@@ -70,31 +36,34 @@ public class GUI extends javax.swing.JFrame {
      * @param state state of the turing machine
      */
     public void showCurrentState(String state) {
-        lCurrentState.setText(state);
+        lNewCurrentState.setText(state);
     }
 
+    /**
+     * sets the blank symbol
+     *
+     * @param newBlank new blank symbol
+     */
     public void setBlank(String newBlank) {
-        blank = newBlank;
         tapeTableModel.updateBlank(newBlank);
     }
 
     /**
      * Creates new form GUI
      */
-    public GUI() {
-        currentState = "undefined";
-        numberOfTapes = 0;
-        numberOfStates = 0;
-        blank = "undefined";
+    public GUI(Controller controller) {
+        this.controller = controller;
         tapes = new ArrayList<>();
         tapeTableModel = new TapeTableModel();
 
         initComponents();
-        
+
+    }
+    
+    public void reporError(String message){
+        JOptionPane.showMessageDialog(this, message, "error", HEIGHT);
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,144 +73,138 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lBlankSymbol = new javax.swing.JLabel();
-        tfBlankSymbol = new javax.swing.JTextField();
-        lNumberOfTapes = new javax.swing.JLabel();
-        sNumberOfTapes = new javax.swing.JSpinner();
-        lNumberOfStates = new javax.swing.JLabel();
-        sNumberOfStates = new javax.swing.JSpinner();
-        bApplyChanges = new javax.swing.JButton();
-        lTmpResults = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tapeTable = new javax.swing.JTable();
-        lStaticCurrentState = new javax.swing.JLabel();
         lCurrentState = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        tfFilepath = new javax.swing.JTextField();
+        bLoad = new javax.swing.JButton();
+        lStaticCurrentState = new javax.swing.JLabel();
+        lNewCurrentState = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tTapes = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        sSteps = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lBlankSymbol.setText("blank symbol:");
+        jLabel1.setText("Select input file to run:");
 
-        tfBlankSymbol.addActionListener(new java.awt.event.ActionListener() {
+        tfFilepath.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFilepath.setText("path to the file");
+        tfFilepath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBlankSymbolActionPerformed(evt);
+                tfFilepathActionPerformed(evt);
             }
         });
 
-        lNumberOfTapes.setText("number of tapes");
-
-        sNumberOfTapes.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-
-        lNumberOfStates.setText("number of states");
-
-        sNumberOfStates.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-
-        bApplyChanges.setText("apply changes");
-        bApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+        bLoad.setText("load");
+        bLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bApplyChangesActionPerformed(evt);
+                bLoadActionPerformed(evt);
             }
         });
-
-        lTmpResults.setText("chosen results: ");
-        lTmpResults.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        tapeTable.setModel(tapeTableModel);
-        jScrollPane1.setViewportView(tapeTable);
 
         lStaticCurrentState.setText("current state:");
+
+        lNewCurrentState.setText("undefined");
+
+        tTapes.setModel(tapeTableModel);
+        jScrollPane1.setViewportView(tTapes);
+
+        jButton1.setText("run");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("next");
+
+        sSteps.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        jLabel3.setText("steps");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSteps, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lBlankSymbol)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfBlankSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lNumberOfTapes)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sNumberOfTapes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lNumberOfStates)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sNumberOfStates, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(bApplyChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(107, 107, 107)
-                                    .addComponent(lStaticCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(81, 81, 81)
-                                    .addComponent(lTmpResults, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(78, 78, 78)
+                            .addComponent(lStaticCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lNewCurrentState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(190, 190, 190)
+                            .addComponent(lCurrentState, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfFilepath, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bLoad, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lBlankSymbol)
-                    .addComponent(tfBlankSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lNumberOfStates)
-                    .addComponent(sNumberOfStates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lNumberOfTapes)
-                    .addComponent(sNumberOfTapes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bApplyChanges))
+                    .addComponent(tfFilepath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bLoad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lTmpResults, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(lCurrentState)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lStaticCurrentState)
-                    .addComponent(lCurrentState))
+                    .addComponent(lNewCurrentState))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel2)
+                    .addComponent(sSteps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfBlankSymbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBlankSymbolActionPerformed
+    private void tfFilepathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFilepathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfBlankSymbolActionPerformed
+    }//GEN-LAST:event_tfFilepathActionPerformed
 
-    private void bApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bApplyChangesActionPerformed
-        String newBlank = tfBlankSymbol.getText();
-        int newNumberOfTapes = Integer.parseInt(sNumberOfTapes.getValue().toString());
-        int newNumberOfStates = Integer.parseInt(sNumberOfStates.getValue().toString());
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int steps = Integer.parseInt(sSteps.getValue().toString());
+        controller.next(steps);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        if (newBlank.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "no value"
-                    + " for blank has been entered", "error", HEIGHT);
-        } else {
-            lTmpResults.setText("no tapes: " + newNumberOfTapes
-                    + " no states: " + newNumberOfStates + " blank: " + newBlank);
-
-            updateBlank(newBlank);
-            updateNumberOfStates(newNumberOfStates);
-            updateNumberOfTapes(newNumberOfTapes);
-        }
-
-
-    }//GEN-LAST:event_bApplyChangesActionPerformed
+    private void bLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoadActionPerformed
+        String filepath = tfFilepath.getText();;
+        controller.loadMachine(filepath);
+    }//GEN-LAST:event_bLoadActionPerformed
 
     /**
      * starts the GUI.
@@ -269,28 +232,23 @@ public class GUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         this.setVisible(true);
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUI().setVisible(true);
-//            }
-//        });
+  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bApplyChanges;
+    private javax.swing.JButton bLoad;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lBlankSymbol;
     private javax.swing.JLabel lCurrentState;
-    private javax.swing.JLabel lNumberOfStates;
-    private javax.swing.JLabel lNumberOfTapes;
+    private javax.swing.JLabel lNewCurrentState;
     private javax.swing.JLabel lStaticCurrentState;
-    private javax.swing.JLabel lTmpResults;
-    private javax.swing.JSpinner sNumberOfStates;
-    private javax.swing.JSpinner sNumberOfTapes;
-    private javax.swing.JTable tapeTable;
-    private javax.swing.JTextField tfBlankSymbol;
+    private javax.swing.JSpinner sSteps;
+    private javax.swing.JTable tTapes;
+    private javax.swing.JTextField tfFilepath;
     // End of variables declaration//GEN-END:variables
 }

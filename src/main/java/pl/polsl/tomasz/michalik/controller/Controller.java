@@ -1,76 +1,86 @@
 package pl.polsl.tomasz.michalik.controller;
 
-
-import java.util.Scanner;
+import java.util.ArrayList;
 import pl.polsl.tomasz.michalik.exceptions.*;
 import pl.polsl.tomasz.michalik.model.TuringMachine;
 import pl.polsl.tomasz.michalik.view.GUI;
-import pl.polsl.tomasz.michalik.view.TuringMachineView;
 
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
-/** the controller class, has the app;s main method
+/**
+ * the controller class, has the app;s main method
  *
  * @author Tomasz Michalik
  * @version 3.0
  */
 public class Controller {
-    /** main method controlling entire app
-    * @param args path to intput file
-    */
+
+    private TuringMachine turingMachine;
+    private GUI tmGUI;
+
+    /**
+     * main method starting the controller
+     *
+     * @param args path to intput file
+     */
     public static void main(String[] args) {
-        
-        TuringMachine turingMachine = new TuringMachine();
+        Controller controller = new Controller();
+        controller.initializeGUI();
+//        controller.loadMachine(args[0]);
+    }
+
+    /**
+     * loads new turing machine
+     *
+     * @param filepath path to file containing the machines's specification
+     */
+    public void loadMachine(String filepath) {
         TMReader tmr = new TMReader();
-        
-        try{
-            // source file
-            if (args.length == 1){
-                try{
-                    turingMachine = tmr.readTMFromFile(args[0]);
-                }
-                catch (FileFormatException ex){
-                    System.out.print(ex.getMessage());
+
+        try {
+            turingMachine = tmr.readTMFromFile(filepath);
+        } catch (Exception ex) {
+            tmGUI.reporError(ex.getMessage());
+            return;
+        }
+
+        tmGUI.setBlank(turingMachine.getBlank());
+        tmGUI.showCurrentState(turingMachine.getCurrentState());
+        tmGUI.showTapes(turingMachine.getTapes());
+
+    }
+
+    /**
+     * executes new move in the machine
+     *
+     * @param steps number of moves to make
+     */
+    public void next(int steps) {
+        if (turingMachine != null) {
+            for (int i = 0; i < steps; i++) {
+                try {
+                    turingMachine.next();
+                } catch (TMException ex) {
+                    tmGUI.reporError(ex.getMessage());
                     return;
                 }
+                tmGUI.showCurrentState(turingMachine.getCurrentState());
+                tmGUI.showTapes(turingMachine.getTapes());
             }
-            // gettting parameters from the command line
-            else {
-                turingMachine = tmr.readFromCmd();
-            }
+
+        } else {
+            tmGUI.reporError("no machine has been loaded yet!");
         }
-        catch (TMException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        GUI tmGUI = new GUI();
-        tmGUI.setBlank(turingMachine.getBlank());
-        tmGUI.showTapes(turingMachine.getTapes());
-        tmGUI.showCurrentState(turingMachine.getCurrentState());
-        tmGUI.run();
-        
-        
-        
-//        //managing the view
-//        TuringMachineView view = new TuringMachineView();
-//        
-        Scanner scanner = new Scanner(System.in);
-        
-        Boolean goOn = true;
-        while (goOn){
-            tmGUI.showCurrentState(turingMachine.getCurrentState());
-            tmGUI.showTapes(turingMachine.getTapes());
-            System.out.println(turingMachine.getCurrentState());
-            System.out.println("continue? [y/n]");
-            goOn = "y".equals(scanner.nextLine());
-            turingMachine.next();
-        }
-        
+
     }
+
+    /**
+     * initializes GUI
+     */
+    private void initializeGUI() {
+        tmGUI = new GUI(this);
+        tmGUI.setBlank("undefined");
+        tmGUI.showTapes(new ArrayList<>());
+        tmGUI.showCurrentState("undefined");
+        tmGUI.run();
+    }
+
 }
