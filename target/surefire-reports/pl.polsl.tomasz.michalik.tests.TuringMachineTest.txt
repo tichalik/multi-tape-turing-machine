@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: pl.polsl.tomasz.michalik.tests.TuringMachineTest
+-------------------------------------------------------------------------------
+Tests run: 55, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 2.896 sec - in pl.polsl.tomasz.michalik.tests.TuringMachineTest

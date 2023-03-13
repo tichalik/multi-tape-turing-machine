@@ -1,0 +1,10 @@
+2 3
+a b c
+a
+0
+0 0 0 0 0
+0 0 0 1 0
+a 0 0 a 1 1 R R
+a 0 1 a 1 0 R R
+
+file with 2 numbers of tapes
